@@ -1,0 +1,44 @@
+`cat /var/log/studlog| grep "Failed password"|grep "<invalid username>"|sort|uniq |
+
+head -1000  > failas100`
+
+`cat /var/log/studlog| grep "Failed password"|grep -v "<invalid username>"|sort|uniq |
+
+head -1000 > failas101`
+
+`cat failas100|awk '{print $15}'|sort|uniq > "failas102"`
+
+
+
+`cat failas101|awk '{print $14}'|sort|uniq >"failas103"`
+
+
+Failed=`cat < failas102`
+
+User=`cat < failas103`
+
+rm speti
+
+for i in $Failed; do
+
+for j in $User; do
+
+if [ $i = $j ]
+
+then
+
+echo $i >> speti
+
+fi
+
+done
+
+done
+
+
+Spet=`cat < speti`
+
+User=`cat < failas101|head -1000`
+
+
+cat failas101|head -1000| grep -f speti| awk '{print $12}'|sort|uniq
